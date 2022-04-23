@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 import tools
 
 
-def coef_dist_plot(coefs, tag=None):
+def coef_dist_plot(coefs, tag=None, force=False):
     stats = tools.desc_stats(coefs)
 
     if not tag or tag == '0':  # HACK this is more hardcoded than an ameoba
@@ -20,7 +20,7 @@ def coef_dist_plot(coefs, tag=None):
 
     output_path = os.path.join(output_dir, fname)
 
-    if os.path.exists(output_path):
+    if os.path.exists(output_path) or not force:
         # don't plotsta if you don't gotsta ya dingus!
         return
 
