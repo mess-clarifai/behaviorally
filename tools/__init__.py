@@ -1,6 +1,8 @@
-import numpy as np
-from fuzzywuzzy import process
+from itertools import count
 
+import numpy as np
+import pandas as pd
+import fuzzywuzzy as fuzz
 
 # TODO fix this hacky mess
 def get_upc_mappings(a, b, threshold=75):
@@ -11,7 +13,7 @@ def get_upc_mappings(a, b, threshold=75):
 
     for i, row in a.iterrows():  # each row will correspond to an item. need to look up UPC 10 digit
         upc = row['UPC 10 digit']  # the hard-coded strings are pathetic!!!
-        match, score = process.extractOne(upc, b['upc'].values)
+        match, score = fuzz.process.extractOne(upc, b['upc'].values)
 
         if score >= threshold:
             d[match] = upc
@@ -41,3 +43,23 @@ def desc_stats(a, center=np.mean, verbose=False):
         'median': _median,
         'std': _std,
     }
+
+
+def infer_report_dates(data, target_column='REPORT', periods=156, frequency='w', start_date='3/31/2019'):
+    T = 156  # total number of reports
+    report_dates = {}
+    t_0 = pd.to_datetime(start_date)  # just from looking at the Index page from their report spreadsheet.
+    for i in count(start=data[0]):  # start with the first value to be more agnostic to different indexing schemes
+        t_i = t_0 + pd.Timedelta(i, unit='w')  # period t_i
+        report_dates[float(i)] = t_i
+        if i-1 == T:
+            break
+
+    
+    date_map = lambda t: report_dates.get(t)
+
+    infered_dates = [date_map(t) for t in data]
+    infered_dates = pd.to_datetime(infered_dates)
+
+    return infered_dates
+    

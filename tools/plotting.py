@@ -35,3 +35,33 @@ def coef_dist_plot(coefs, tag=None, force=False):
     plt.savefig(output_path)
 
     plt.clf()
+
+
+def plot_series(data, x, y, title=None, period_length=13):
+    g = sns.lineplot(
+        x=x,
+        y=y,
+        hue='Image ID', # hue='Brand Name', # hue="Image Name",  # hue="Product",
+        data=data,
+        legend=True
+    )
+
+    plt.title(title)
+    plt.xlim((0,156))  # for the items not just in single periods
+    plt.xlabel(x)
+    plt.ylabel(y)
+    plt.tight_layout()
+    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+
+    g.set_xticks(range(data['report_dates'].nunique())) # <--- set the ticks first
+    g.set_xticklabels([t.strftime('%b %d, %Y') for t in data['report_dates'].unique()])
+
+    for i, label in enumerate(g.xaxis.get_ticklabels()):
+        if ((i+1) % period_length) == 0:
+            label.set_visible(True)
+        else:
+            label.set_visible(False)
+
+    plt.xticks(rotation=45)
+
+    plt.show()
