@@ -7,6 +7,8 @@ Post-sales work with Behaviorally.
 | Application | Owner | Models | Concepts | Total Images |
 | --- | --- | --- | --- | --- |
 | Behaviorally - Line Training | @tony | Line Detection, | "irish spring", "product" |
+ Flash.PDP - Deodorant Experiment 3
+ Flash.PDP - Trash Bags | https://portal.clarifai.com/users/mess/apps/Flash.PDP - Trash Bags
 
 ## Associated Work
 

@@ -1,0 +1,6 @@
+[submodule "flash-ai-stuff"]
+	path = flash-ai-stuff
+	url = git@github.com:tony-at-clarifai/flash-ai-stuff.git
+[submodule "flash-pdp-stuff"]
+	path = flash-pdp-stuff
+	url = git@github.com:tony-at-clarifai/flash-pdp-stuff.git
