@@ -6,6 +6,7 @@ VALUES.*
 CREDS.*
 *SKETCH*.*
 .vs_code/
+deliveries/
 
 *.zip  # simply not needed
 
