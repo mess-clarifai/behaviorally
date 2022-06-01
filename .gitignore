@@ -7,6 +7,8 @@ CREDS.*
 *SKETCH*.*
 .vs_code/
 
+*.zip  # simply not needed
+
 # macos
 .DS_Store
 
